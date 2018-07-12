@@ -34,9 +34,9 @@ class DynamicRelationSubscriber implements EventSubscriber
         if ($metadata->getName() == $this->userClass) {
             $metadata->mapManyToMany([
                 'targetEntity'  => $this->tenantClass,
-								'type'					=> ClassMetadataInfo::MANY_TO_MANY,
+				'type'					=> ClassMetadataInfo::MANY_TO_MANY,
                 'fieldName'     => 'userTenants',
-								'inversedBy' 		=> 'users',
+				'inversedBy' 		=> 'users',
                 'cascade'       => ['persist'],
                 'joinTable'     => [
                     'name'        => 'tenant_users',
@@ -68,11 +68,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                 ]
             ]);
 
-						$metadata->mapManyToMany([
-								'targetEntity'  => $this->userClass,
-								'mappedBy'      => 'userTenants',
-								'fieldName' 		=> 'users'
-						]);
+            $metadata->mapManyToMany([
+                    'targetEntity'  => $this->userClass,
+                    'mappedBy'      => 'userTenants',
+                    'fieldName' 		=> 'users'
+            ]);
         }
 
         if (in_array('Cvele\MultiTenantBundle\Model\TenantAwareEntityInterface', class_implements($metadata->getName()))) {
